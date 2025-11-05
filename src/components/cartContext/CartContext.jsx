@@ -89,7 +89,11 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchCart();
+    if (token) {
+      fetchCart();
+    } else {
+      dispatch({ type: "CLEAR_CART" });
+    }
   }, [token]);
 
   const cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
