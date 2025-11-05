@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../authContext/AuthContext";
 import { useCart } from "../cartContext/CartContext";
 import { useSearch } from "../searchContext/SearchContext";
+import logo from "../../assets/shopping_logo.png";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="logo">
-          🛍️ ShopEase
+          ShopEase <img src={logo} alt="ShopEase Logo"/>
         </Link>
         <Link to="/products" className="nav-link products-link">
           Products
