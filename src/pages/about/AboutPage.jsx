@@ -1,13 +1,16 @@
 import React from "react";
 import "./AboutPage.css";
-import logo from "../../assets/shopping_logo.png"
+import logo from "../../assets/shopping_logo.png";
 
 const About = () => {
   return (
     <div className="about-container">
       <div className="about-hero">
         <h1>
-          About <span>ShopEase {logo}</span>
+          About
+          <span>
+            ShopEase <img src={logo} alt="ShopEase Logo" className="logo-img" />
+          </span>
         </h1>
         <p>Your one-stop destination for quality and affordable products.</p>
       </div>
