@@ -16,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="logo">
-          ShopEase <img src={logo} alt="ShopEase Logo"/>
+          ShopEase <img src={logo} alt="ShopEase Logo" className="logo" />
         </Link>
         <Link to="/products" className="nav-link products-link">
           Products
