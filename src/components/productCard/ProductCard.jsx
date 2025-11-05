@@ -9,8 +9,7 @@ const ProductCard = ({ product }) => {
         <h3>{product.name}</h3>
       </NavLink>
       <p className="price">${product.price}</p>
-      <div className="rating">⭐️⭐️⭐️⭐️☆</div>
-      <button className="add-btn">Add to Cart</button>
+      <div className="rating">${product.rating}</div>
     </div>
   );
 };
