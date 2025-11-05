@@ -11,13 +11,6 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-.nav-left .logo {
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2b2b2b;
-  padding-right: 50px;
-}
 .logo {
   text-decoration: none;
   font-size: 1.5rem;
@@ -25,6 +18,7 @@
   color: #2b2b2b;
   padding-right: 50px;
 }
+
 .nav-center {
   display: flex;
   align-items: center;
