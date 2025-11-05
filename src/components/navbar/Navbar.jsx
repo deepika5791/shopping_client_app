@@ -21,13 +21,15 @@ const Navbar = () => {
           Products
         </Link>
 
+        <Link to="/about" className="nav-link products-link">
+          About
+        </Link>
+
         {user?.role === "admin" && (
           <Link to="/admin" className="nav-link admin-link">
             Admin Panel
           </Link>
         )}
-
-        
       </div>
 
       <div className="nav-center">

@@ -13,6 +13,7 @@ import Admin from "./components/admin/Admin";
 import Footer from "./components/footer/Footer";
 import "./App.css";
 import { SearchProvider } from "./components/searchContext/SearchContext";
+import About from "./pages/about/AboutPage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
               <main>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/product/:id" element={<ProductDetails />} />
                   <Route path="/cart" element={<Cart />} />
