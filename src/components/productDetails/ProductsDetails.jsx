@@ -32,7 +32,6 @@ const ProductDetails = () => {
           <button className="add" onClick={() => addToCart(product)}>
             Add to Cart
           </button>
-          <button className="buy">Buy Now</button>
         </div>
       </div>
     </div>

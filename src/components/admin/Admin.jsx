@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../authContext/AuthContext";
+import { useSearch } from "../searchContext/SearchContext";
 import "./Admin.css";
 const Admin = () => {
+  const { searchTerm } = useSearch();
   const { token } = useAuth();
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
@@ -66,6 +68,9 @@ const Admin = () => {
     fetchProducts();
   }, []);
 
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div className="admin-page">
       <h2>Admin Panel</h2>
@@ -104,7 +109,7 @@ const Admin = () => {
       </div>
 
       <div className="product-list">
-        {products.map((p) => (
+        {filteredProducts.map((p) => (
           <div key={p._id} className="product-item">
             <img src={p.image} alt={p.name} />
             <p>{p.name}</p>
