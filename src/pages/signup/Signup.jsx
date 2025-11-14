@@ -9,6 +9,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState({ type: "", text: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -16,17 +17,22 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage({ type: "", text: "" });
     try {
       const res = await axios.post(
         "https://shopping-app-gsnv.onrender.com/api/auth/signup",
         formData
       );
-      console.log(res.data);
-      alert("Signup successful!");
-      navigate("/login");
+      setMessage({
+        type: "success",
+        text: "Signup successful! Redirecting...",
+      });
+      setTimeout(() => navigate("/login"), 1500);
     } catch (error) {
-      console.error(error.response?.data || error.message);
-      alert(error.response?.data?.error || "Signup failed");
+      setMessage({
+        type: "error",
+        text: error.response?.data?.error || "Signup failed",
+      });
     }
   };
 
@@ -43,6 +49,10 @@ const Signup = () => {
         <div className="auth-box">
           <h2>Create Account</h2>
           <p className="auth-subtext">Sign up to get started</p>
+
+          {message.text && (
+            <p className={`auth-message ${message.type}`}>{message.text}</p>
+          )}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <input

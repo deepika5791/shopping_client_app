@@ -7,6 +7,7 @@ import "./Login.css";
 const Login = () => {
   const { loginUser } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [message, setMessage] = useState({ type: "", text: "" }); // for success/error
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -14,22 +15,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage({ type: "", text: "" });
     try {
       const res = await axios.post(
         "https://shopping-app-gsnv.onrender.com/api/auth/login",
         formData
       );
-      console.log(res.data);
-
       // save token in localStorage
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       loginUser(res.data.user, res.data.token);
-      alert("Login successful!");
-      navigate("/");
+
+      setMessage({ type: "success", text: "Login successful!" });
+      setTimeout(() => navigate("/"), 1500); // redirect after 1.5s
     } catch (error) {
-      console.error(error.response?.data || error.message);
-      alert(error.response?.data?.error || "Login failed");
+      setMessage({
+        type: "error",
+        text: error.response?.data?.error || "Login failed",
+      });
     }
   };
 
@@ -46,6 +49,10 @@ const Login = () => {
         <div className="auth-box">
           <h2>Welcome Back</h2>
           <p className="auth-subtext">Login to your account</p>
+
+          {message.text && (
+            <p className={`auth-message ${message.type}`}>{message.text}</p>
+          )}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <input
