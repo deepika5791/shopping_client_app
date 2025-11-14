@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./Home.css";
 import axios from "axios";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState(3600);
 
   useEffect(() => {
     axios
       .get("https://shopping-app-gsnv.onrender.com/products")
-      .then((res) => setProducts(res.data.slice(0, 6)))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setProducts(res.data.slice(0, 6));
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -40,13 +49,21 @@ const Home = () => {
       <section className="featured">
         <h2>Featured Products</h2>
         <div className="product-grid">
-          {products.map((item) => (
-            <div key={item._id} className="product-card">
-              <img src={item.image} alt={item.name} />
-              <h3>{item.name}</h3>
-              <p className="price">${item.price}</p>
-            </div>
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="product-card">
+                  <Skeleton height={180} borderRadius={10} />
+                  <Skeleton height={20} style={{ margin: "10px 0" }} />
+                  <Skeleton height={20} width={60} />
+                </div>
+              ))
+            : products.map((item) => (
+                <div key={item._id} className="product-card">
+                  <img src={item.image} alt={item.name} />
+                  <h3>{item.name}</h3>
+                  <p className="price">${item.price}</p>
+                </div>
+              ))}
         </div>
       </section>
 
