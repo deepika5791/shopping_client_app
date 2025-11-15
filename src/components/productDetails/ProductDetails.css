@@ -23,7 +23,7 @@
 .details-right p {
   color: #555;
   margin-bottom: 15px;
-   font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 .details-right h3 {
   color: #333;
@@ -54,6 +54,7 @@
 .add:hover {
   background: #005fa3;
 }
-.buy:hover {
-  background: #008f5c;
+.details-left img:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
 }
