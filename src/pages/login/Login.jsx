@@ -7,7 +7,7 @@ import "./Login.css";
 const Login = () => {
   const { loginUser } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState({ type: "", text: "" }); // for success/error
+  const [message, setMessage] = useState({ type: "", text: "" }); 
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -21,13 +21,13 @@ const Login = () => {
         "https://shopping-app-gsnv.onrender.com/api/auth/login",
         formData
       );
-      // save token in localStorage
+ 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       loginUser(res.data.user, res.data.token);
 
       setMessage({ type: "success", text: "Login successful!" });
-      setTimeout(() => navigate("/"), 1500); // redirect after 1.5s
+      setTimeout(() => navigate("/"), 1500); 
     } catch (error) {
       setMessage({
         type: "error",

@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../authContext/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartContext = createContext();
 
@@ -42,49 +44,67 @@ export const CartProvider = ({ children }) => {
       dispatch({ type: "FETCH_SUCCESS", payload: res.data.products || [] });
     } catch (error) {
       console.error("Error fetching cart:", error);
+      toast.error("Failed to fetch cart");
     }
   };
 
   const addToCart = async (product) => {
-    if (!token) return alert("Please login to add items to your cart");
+    if (!token) {
+      toast.error("Please login to add items to your cart");
+      return;
+    }
+
     try {
       const res = await axios.post(
         `${API_BASE}/add`,
         { productId: product._id, quantity: 1 },
         getAuthConfig()
       );
+
       dispatch({
         type: "ADD_TO_CART",
         payload: res.data.cart.products || [],
       });
+
+      toast.success("Added to cart!");
     } catch (error) {
       console.error("Error adding to cart:", error);
+      toast.error("Failed to add item");
     }
   };
 
   const removeFromCart = async (productId) => {
     if (!token) return;
+
     try {
       const res = await axios.delete(
         `${API_BASE}/remove/${productId}`,
         getAuthConfig()
       );
+
       dispatch({
         type: "REMOVE_FROM_CART",
         payload: res.data.cart.products || [],
       });
+
+      toast.success("Removed from cart");
     } catch (error) {
       console.error("Error removing from cart:", error);
+      toast.error("Failed to remove item");
     }
   };
 
   const clearCart = async () => {
     if (!token) return;
+
     try {
       await axios.delete(`${API_BASE}/clear`, getAuthConfig());
       dispatch({ type: "CLEAR_CART" });
+
+      toast.success("Cart cleared");
     } catch (error) {
       console.error("Error clearing cart:", error);
+      toast.error("Failed to clear cart");
     }
   };
 
@@ -109,6 +129,8 @@ export const CartProvider = ({ children }) => {
         clearCart,
       }}
     >
+     
+      <ToastContainer position="top-center" />
       {children}
     </CartContext.Provider>
   );
