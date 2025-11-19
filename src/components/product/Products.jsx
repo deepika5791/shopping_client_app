@@ -17,7 +17,7 @@ const Products = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://shopping-app-gsnv.onrender.com/products")
+      .get("https://shopping-app-kzh0.onrender.com/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
