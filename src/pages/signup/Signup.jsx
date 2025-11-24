@@ -20,7 +20,7 @@ const Signup = () => {
     setMessage({ type: "", text: "" });
     try {
       const res = await axios.post(
-        "https://shopping-app-kzh0.onrender.com/api/auth/signup",
+        "https://shopping-app-nz4t.onrender.com/api/auth/signup",
         formData
       );
       setMessage({
