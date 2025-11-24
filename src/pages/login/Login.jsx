@@ -18,7 +18,7 @@ const Login = () => {
     setMessage({ type: "", text: "" });
     try {
       const res = await axios.post(
-        "https://shopping-app-kzh0.onrender.com/api/auth/login",
+        "https://shopping-app-nz4t.onrender.com/api/auth/login",
         formData
       );
  
