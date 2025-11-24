@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const { token } = useAuth();
 
-  const API_BASE = "https://shopping-app-gsnv.onrender.com/api/cart";
+  const API_BASE = "https://shopping-app-nz4t.onrender.com/api/cart";
 
   const getAuthConfig = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

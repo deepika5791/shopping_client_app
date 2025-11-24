@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("https://shopping-app-kzh0.onrender.com/products")
+      .get("https://shopping-app-nz4t.onrender.com/products")
       .then((res) => {
         setProducts(res.data.slice(0, 6));
         setLoading(false);

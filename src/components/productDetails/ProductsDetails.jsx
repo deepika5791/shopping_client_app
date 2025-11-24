@@ -11,7 +11,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://shopping-app-kzh0.onrender.com/products/${id}`)
+      .get(`https://shopping-app-nz4t.onrender.com/products/${id}`)
       .then((res) => {
         setProduct(res.data);
       });

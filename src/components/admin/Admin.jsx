@@ -16,14 +16,14 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     const res = await axios.get(
-      "https://shopping-app-kzh0.onrender.com/products"
+      "https://shopping-app-nz4t.onrender.com/products"
     );
     setProducts(res.data);
   };
 
   const handleAdd = async () => {
     await axios.post(
-      "https://shopping-app-kzh0.onrender.com/products",
+      "https://shopping-app-nz4t.onrender.com/products",
       newProduct,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -33,7 +33,7 @@ const Admin = () => {
   };
   const handleDelete = async (id) => {
     await axios.delete(
-      `https://shopping-app-kzh0.onrender.com/products/${id}`,
+      `https://shopping-app-nz4t.onrender.com/products/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -44,7 +44,7 @@ const Admin = () => {
   const handleUpdate = async () => {
     if (!editId) return;
     await axios.patch(
-      `https://shopping-app-kzh0.onrender.com/products/${editId}`,
+      `https://shopping-app-nz4t.onrender.com/products/${editId}`,
       newProduct,
       {
         headers: { Authorization: `Bearer ${token}` },
