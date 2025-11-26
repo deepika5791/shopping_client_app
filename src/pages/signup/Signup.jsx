@@ -18,6 +18,12 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      setError("Invalid email format");
+      return;
+    }
+
     try {
       const res = await axios.post(
         "https://shopping-app-nz4t.onrender.com/api/auth/signup",
@@ -76,7 +82,7 @@ const Signup = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="auth-btn">
+            <button type="submit" className="auth-btn" disabled={!form.email || !form.password}>
               Sign Up
             </button>
           </form>
