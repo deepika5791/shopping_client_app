@@ -50,7 +50,7 @@ const Navbar = () => {
               className="nav-link logout-btn"
               onClick={() => {
                 logoutUser();
-                navigate("/");
+                navigate("/login");
               }}
             >
               Logout
