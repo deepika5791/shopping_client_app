@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
+    if (!emailRegex.test(formData.email)) {
       setError("Invalid email format");
       return;
     }
