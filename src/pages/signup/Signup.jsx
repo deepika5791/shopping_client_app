@@ -82,7 +82,7 @@ const Signup = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="auth-btn" disabled={!form.email || !form.password}>
+            <button type="submit" className="auth-btn" disabled={!formData.email || !formData.password}>
               Sign Up
             </button>
           </form>
