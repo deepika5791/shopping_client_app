@@ -7,7 +7,8 @@ import "./Login.css";
 const Login = () => {
   const { loginUser } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState({ type: "", text: "" }); 
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -16,23 +17,26 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://shopping-app-nz4t.onrender.com/api/auth/login",
         formData
       );
- 
+
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       loginUser(res.data.user, res.data.token);
 
       setMessage({ type: "success", text: "Login successful!" });
-      setTimeout(() => navigate("/"), 1500); 
+      setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       setMessage({
         type: "error",
         text: error.response?.data?.error || "Login failed",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,8 +73,8 @@ const Login = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="auth-btn">
-              Login
+            <button type="submit" className="auth-btn" disabled={loading}>
+              {loading ? <span className="btn-spinner"></span> : "Login"}
             </button>
           </form>
 
