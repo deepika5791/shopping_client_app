@@ -50,8 +50,10 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (product) => {
     if (!token) {
-      toast.error("Please login to add items to your cart");
-      return;
+      toast.error("Please login to add items to your cart", {
+        toastId:"login-error"
+      });
+ 
     }
 
     try {
