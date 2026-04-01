@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
@@ -11,6 +11,9 @@ const Signup = () => {
   });
   const [message, setMessage] = useState({ type: "", text: "" });
   const navigate = useNavigate();
+  const username = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,12 +25,12 @@ const Signup = () => {
     if (!emailRegex.test(formData.email)) {
       setError("Invalid email format");
       return;
-    }
+    } 
 
     try {
       const res = await axios.post(
         "https://shopping-app-nz4t.onrender.com/api/auth/signup",
-        formData
+        formData,
       );
       setMessage({
         type: "success",
@@ -41,7 +44,12 @@ const Signup = () => {
       });
     }
   };
-
+  const changeInputfocus = (event, NextInput) => {
+    if (event.key === "ENTER") {
+      event.preventDefault();
+      NextInput.current.focus();
+    }
+  };
   return (
     <div className="auth-page">
       <div className="auth-left">
@@ -62,6 +70,8 @@ const Signup = () => {
 
           <form onSubmit={handleSubmit} className="auth-form">
             <input
+              ref={username}
+              onKeyDown={(event) => changeInputfocus(event, email)}
               type="text"
               name="username"
               placeholder="Full Name"
@@ -69,6 +79,8 @@ const Signup = () => {
               required
             />
             <input
+              ref={email}
+              onKeyDown={(event) => changeInputfocus(event, password)}
               type="email"
               name="email"
               placeholder="Email Address"
@@ -76,13 +88,18 @@ const Signup = () => {
               required
             />
             <input
+              ref={password}
               type="password"
               name="password"
               placeholder="Password"
               onChange={handleChange}
               required
             />
-            <button type="submit" className="auth-btn" disabled={!formData.email || !formData.password}>
+            <button
+              type="submit"
+              className="auth-btn"
+              disabled={!formData.email || !formData.password}
+            >
               Sign Up
             </button>
           </form>
